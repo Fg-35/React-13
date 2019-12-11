@@ -19,9 +19,6 @@ class FormMovies extends React.Component{
     }
     submitForm(e) {
       e.preventDefault();
-    }
-
-    render(){
       const url = " https://post-a-form.herokuapp.com/api/movies/";
       const config = {
         method: "POST",
@@ -43,6 +40,10 @@ class FormMovies extends React.Component{
         console.error(e);
         alert('Erreur lors de l ajout d un film');
       });
+    }
+
+    render(){
+      
       return(
         <div className="FormMovies">
           <h1>Saisi d'un film</h1>
