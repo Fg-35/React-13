@@ -1,49 +1,76 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 
-class FormMovies extends React.Component{
+class FormMovies extends Component{
     constructor(props) {
         super(props);
         this.state = {
           title: '',
           poster: '',
-          text: '',
+          comment: '',
         }
         this.onChange = this.onChange.bind(this);
         this.submitForm = this.submitForm.bind(this);
+        // this.PostMovie = this.PostMovie.bind(this);
     }
     onChange(e) {
         this.setState({
           [e.target.name]: e.target.value,
         });
     }
+    
+    // PostMovie(){
+     
+    //   const config = {
+    //     method: "POST",
+    //     headers: {
+    //     "Content-Type": "application/json",
+    //   },
+    //   body: JSON.stringify(this.state),
+    // };
+
+    // const url = " https://post-a-form.herokuapp.com/api/movies/";
+
+    // fetch(url,config)
+    //   .then(res => res.json())
+    //   .then(res => {
+    //     if (res.error) {
+    //       alert(res.error);
+    //     } else {
+    //       alert(`Film ajouté avec l'ID ${res}!`);
+    //     }
+    //   }).catch(e => {
+    //     console.error(e);
+    //     alert('Erreur lors de l ajout d un film');
+    //   });
+    // }
     submitForm(e) {
       e.preventDefault();
-      const url = " https://post-a-form.herokuapp.com/api/movies/";
+      const url = "https://post-a-form.herokuapp.com/api/movies/";
       const config = {
         method: "POST",
         headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(this.state),
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(this.state),
     };
-    
-    fetch(url,config)
-      .then(res => res.json)
-      .then(res => {
-        if (res.error) {
-          alert(res.error);
-        } else {
-          alert(`Film ajouté avec l'ID ${res}!`);
-        }
-      }).catch(e => {
-        console.error(e);
-        alert('Erreur lors de l ajout d un film');
-      });
-    }
+
+    fetch(url, config)
+        .then(res => res.json())
+        .then(res => {
+            if (res.error) {
+                alert(res.error);
+            } else {
+                alert(`Film ajouté avec l'ID ${res}!`);
+            }
+        }).catch(e => {
+            console.error(e);
+            alert("Erreur lors de l'ajout du film");
+        });
+    };
+
 
     render(){
-      
       return(
         <div className="FormMovies">
           <h1>Saisi d'un film</h1>
@@ -52,6 +79,7 @@ class FormMovies extends React.Component{
             <fieldset>
             <legend>Informations</legend>
             <div className="form-data">
+
               <label htmlFor="title">Titre</label>
               <input
                 type="text"
@@ -63,7 +91,7 @@ class FormMovies extends React.Component{
             </div>
 
             <div className="form-data">
-              <label htmlFor="firstname">Adresse du poster</label>
+              <label htmlFor="poster">Adresse du poster</label>
               <input
                 type="text"
                 id="poster"
@@ -74,18 +102,22 @@ class FormMovies extends React.Component{
             </div>
 
             <div className="form-data">
-              <label htmlFor="text">Comment</label>
-              <textarea
-                type="text"
-                id="text"
-                name="text"
+              <label htmlFor="comment">Comment</label>
+              <input
+                type="textarea"
+                id="comment"
+                name="comment"
                 onChange={this.onChange}
-                value={this.state.text}
+                value={this.state.comment}
               />
             </div>
           <hr />
             <div className="form-data">
-              <input type="submit" value="Envoyer" />
+              <input 
+              type="submit" 
+              value="Envoyer" 
+              // onClick= {this.PostMovie}
+              />
             </div>
             </fieldset>
           </form>
